@@ -25,7 +25,8 @@ class ParsersTest extends org.scalatest.FunSuite {
 
     replaceAll(
       // infixListType(c, n)
-      imported( P("ohnosequences.cosas").map { _ => "o.c" } )
+      // imported( P("ohnosequences.cosas").map { _ => "o.c" } )
+      shortFQNs
     ).parse(errorMsg) match {
       case Parsed.Success(result, _) => {
         info(result)
