@@ -5,11 +5,11 @@ import scalaparse.Scala._
 
 case object parsers {
 
-  def listParser(cons: Parser[String], nil: Parser[String]): Parser[String] = P(
+  def infixListType(cons: Parser[String], nil: Parser[String]): Parser[String] = P(
     nil | (
       cons ~ "[" ~/
         TypeId.! ~ "," ~
-        listParser(cons, nil) ~
+        infixListType(cons, nil) ~
       "]"
     ).map { case (op, head, tail) =>
       Seq(
@@ -19,6 +19,12 @@ case object parsers {
     }
   )
 
+  def imported(prefix: Parser[String]): Parser[String] = P(
+    prefix ~ "." ~ Id.!
+  ).map { case (pref, id) =>
+    { if (pref.nonEmpty) pref+"." else "" } + id
+  }
+
   def replaceAll(parser: Parser[String]): Parser[String] = P(
     parser | (AnyChar.! ~ replaceAll(parser)).map { case (a, b) => a + b }
   ).rep.map { _.mkString }
@@ -26,7 +32,7 @@ case object parsers {
 
   def applyParserSilently(parser: Parser[String]): String => String = { input =>
 
-    parser.parse(input) match {
+    replaceAll(parser).parse(input) match {
       case Parsed.Success(result, _) => result
       case Parsed.Failure(_, _, _) => input
     }

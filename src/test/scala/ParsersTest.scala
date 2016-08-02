@@ -20,13 +20,13 @@ class ParsersTest extends org.scalatest.FunSuite {
 
     val justList = "ohnosequences.cosas.klists.::[String,ohnosequences.cosas.klists.::[Boolean,ohnosequences.cosas.klists.*[Any]]]"
 
-    val c = P( P("ohnosequences.cosas.klists.") ~ ("KCons") ).map{ _ => " :: " }
-    val n = P( P("ohnosequences.cosas.klists.") ~ ("KNilOf") ~ "[" ~ TypeId.! ~ "]" ).map{ bound => s"*[${bound}]" }
+    val c = P( "ohnosequences.cosas.klists.KCons" ).map{ _ => " :: " }
+    val n = P( "ohnosequences.cosas.klists.KNilOf[" ~ TypeId.! ~ "]" ).map{ bound => s"*[${bound}]" }
 
-    val parsed = replaceAll(listParser(c, n)).parse(errorMsg)
-
-    // info(parsed.toString)
-    parsed match {
+    replaceAll(
+      // infixListType(c, n)
+      imported( P("ohnosequences.cosas").map { _ => "o.c" } )
+    ).parse(errorMsg) match {
       case Parsed.Success(result, _) => {
         info(result)
         assert(true)
