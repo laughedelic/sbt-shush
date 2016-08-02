@@ -17,3 +17,5 @@ dependencyOverrides ++= Set(
 )
 
 disablePlugins(ResolverSettings)
+
+wartremoverErrors in (Compile, compile) -= Wart.Any
