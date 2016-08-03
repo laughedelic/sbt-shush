@@ -19,3 +19,5 @@ dependencyOverrides ++= Set(
 disablePlugins(ResolverSettings)
 
 wartremoverErrors in (Compile, compile) -= Wart.Any
+
+// shushFilter := { x => x + "\n FOOOOOO!" }
