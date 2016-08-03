@@ -1,6 +1,6 @@
 name         := "sbt-shush"
 organization := "laughedelic"
-description  := "Shush, sbt! You are too noisy!"
+description  := "Shush, scalac! You are too noisy!"
 
 sbtPlugin := true
 scalaVersion := "2.10.6"
@@ -19,5 +19,6 @@ dependencyOverrides ++= Set(
 disablePlugins(ResolverSettings)
 
 wartremoverErrors in (Compile, compile) -= Wart.Any
+wartremoverErrors in (Test,    compile) -= Wart.Any
 
 // shushFilter := { x => x + "\n FOOOOOO!" }
