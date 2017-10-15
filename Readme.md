@@ -1,3 +1,12 @@
+----
+
+# DEPRECATED
+
+### Notice, this project was an experiment and is no longer developed. 
+### There is a better alternative: [tek/splain](https://github.com/tek/splain)
+
+----
+
 ## sbt-shush plugin
 
 [![](https://travis-ci.org/laughedelic/sbt-shush.svg)](https://travis-ci.org/laughedelic/sbt-shush)
@@ -9,6 +18,8 @@
 Sometimes compilation error messages are too noisy and hardly readable. This sbt plugin allows you to _shush the compiler_ and make those messages a bit nicer.
 
 What this plugin actually does is overriding various parts of the sbt `compilerReporter` which determines how Scalac errors and warnings are displayed.
+
+
 
 ### Example
 
